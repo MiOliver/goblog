@@ -1,0 +1,33 @@
+{
+  "Address": "北京市",
+  "Age": "23",
+  "CreatedTime": "2015-06-01 12:00:00",
+  "Email": "test@163.com",
+  "Gender": "男",
+  "Id": "",
+  "Password": "123",
+  "Username": "admin",
+  "Weight": "0"
+}
+
+{
+  "Id": "",
+  "Username": "ning",
+  "Password": "123",
+  "Gender": "男",
+  "Age": "23",
+  "Address": "特色书店",
+  "Email": "lxn@163.com",
+  "CreatedTime": "2015-06-01 12:02:22",
+  "Weight": "0"
+}
+
+	Id          string    `orm:"pk"`
+	Username    string    `orm:"size(20)"`
+	Password    string    `orm:"size(100)"`
+	Gender      string    `orm:"size(2)"`
+	Age         int       `orm:"int"`
+	Address     string    `orm:"size(100)"`
+	Email       string    `orm:"size(30)"`
+	CreatedTime time.Time `orm:"auto_now_add;type(datetime)"`
+	Weight      int       `orm:"int"`
