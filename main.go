@@ -1,8 +1,8 @@
 package main
 
 import (
-	_ "firstapi/docs"
-	_ "firstapi/routers"
+	_ "goblog/docs"
+	_ "goblog/routers"
 
 	"github.com/astaxie/beego"
 )
@@ -14,4 +14,3 @@ func main() {
 	}
 	beego.Run()
 }
-

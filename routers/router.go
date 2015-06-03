@@ -8,7 +8,7 @@
 package routers
 
 import (
-	"firstapi/controllers"
+	"goblog/controllers"
 
 	"github.com/astaxie/beego"
 )

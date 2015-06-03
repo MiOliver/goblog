@@ -1,7 +1,7 @@
 package models
 
 import (
-	"errors"
+	// "errors"
 	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
@@ -17,7 +17,8 @@ var (
 func init() {
 
 	orm.RegisterDriver("mysql", orm.DR_MySQL)
-	orm.RegisterDataBase("default", "mysql", "root:root@/go_developer?charset=utf8")
+	orm.RegisterDataBase("default", "mysql", "ning:ning@/go_developer?charset=utf8")
+	// orm.RegisterDataBase("default", "mysql", "root:root@/go_developer?charset=utf8")
 	orm.RegisterModel(new(User))
 	UserList = make(map[string]*User)
 	// u := User{"user_11111", "astaxie", "11111", Profile{"male", 20, "Singapore", "astaxie@gmail.com"}}
@@ -52,30 +53,54 @@ func createTable() {
 
 func AddUser(u User) string {
 	o := orm.NewOrm()
+	fmt.Println(time.Now().Format("2006-01-02 15:04:05"))
 	orm.DefaultTimeLoc = time.Local
 	o.Using("default")
 	u.Id = "user_" + strconv.FormatInt(time.Now().UnixNano(), 10)
-	u.CreatedTime=time.Now()
+	u.CreatedTime = time.Now()
 	fmt.Println(u)
 	fmt.Println(o.Insert(&u))
 	return u.Id
 }
 
-func GetUser(uid string) (u *User, err error) {
-	if u, ok := UserList[uid]; ok {
-		return u, nil
+func GetUser(uid string) (User, error) {
+	var user User
+	err := orm.NewOrm().QueryTable("user").Filter("Id", uid).One(&user)
+	if err == nil {
+		fmt.Println(user)
 	}
-	return nil, errors.New("User not exists")
+	fmt.Println()
+	return user, err
 }
 
-func GetAllUsers() map[string]*User {
-	return UserList
+func GetAllUsers() []User {
+
+	var users []User
+	cnt, _ := orm.NewOrm().QueryTable("user").All(&users)
+	for _, user := range users {
+		fmt.Println(user)
+	}
+	if cnt > 0 {
+		fmt.Println("cnt:", cnt)
+	}
+	fmt.Println()
+
+	// o := orm.NewOrm()
+	// var userLists []orm.ParamsList
+	// num, err := o.QueryTable("user").ValuesList(&userLists)
+	// if err == nil {
+	// 	fmt.Printf("Result Nums: %d\n", num)
+	// 	for _, row := range userLists {
+	// 		fmt.Println(row)
+	// 	}
+	// }
+	return users
 }
 
-func UpdateUser(uid string, uu *User) (num int64, err error) {
+func UpdateUser(uu *User) (num int64, err error) {
 	o := orm.NewOrm()
 	if uu != nil {
-		num, err := o.Update(&uu)
+		num, err := o.Update(uu)
 		if err != nil {
 			fmt.Println(err)
 		} else {
@@ -86,14 +111,27 @@ func UpdateUser(uid string, uu *User) (num int64, err error) {
 }
 
 func Login(username, password string) bool {
-	for _, u := range UserList {
-		if u.Username == username && u.Password == password {
+	var users []User
+	cnt, _ := orm.NewOrm().QueryTable("user").All(&users)
+	for _, user := range users {
+		if user.Username == username && user.Password == password {
 			return true
 		}
+	}
+	if cnt > 0 {
+		fmt.Println("cnt:", cnt)
 	}
 	return false
 }
 
 func DeleteUser(uid string) {
-	delete(UserList, uid)
+	var user User
+	o := orm.NewOrm()
+	err := orm.NewOrm().QueryTable("user").Filter("Id", uid).One(&user)
+	if err == nil {
+		fmt.Println(user)
+	}
+
+	num, err := o.Delete(&user)
+	fmt.Printf("NUM: %d, ERR: %v\n", num, err)
 }

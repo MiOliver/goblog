@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"encoding/json"
-	"firstapi/models"
 	"fmt"
 	"github.com/astaxie/beego"
+	"goblog/models"
 )
 
 // Operations about Users
@@ -69,7 +69,7 @@ func (u *UserController) Put() {
 	if uid != "" {
 		var user models.User
 		json.Unmarshal(u.Ctx.Input.RequestBody, &user)
-		uu, err := models.UpdateUser(uid, &user)
+		uu, err := models.UpdateUser(&user)
 		if err != nil {
 			u.Data["json"] = err
 		} else {
