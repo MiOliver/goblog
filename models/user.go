@@ -17,7 +17,7 @@ var (
 func init() {
 
 	orm.RegisterDriver("mysql", orm.DR_MySQL)
-	orm.RegisterDataBase("default", "mysql", "ning:ning@/go_developer?charset=utf8")
+	orm.RegisterDataBase("default", "mysql", "root:root@/go_developer?charset=utf8")
 	// orm.RegisterDataBase("default", "mysql", "root:root@/go_developer?charset=utf8")
 	orm.RegisterModel(new(User))
 	UserList = make(map[string]*User)
