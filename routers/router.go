@@ -30,6 +30,11 @@ func init() {
 				&controllers.BlogController{},
 			),
 		),
+		beego.NSNamespace("/blogcategory",
+			beego.NSInclude(
+				&controllers.BlogCategoryController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

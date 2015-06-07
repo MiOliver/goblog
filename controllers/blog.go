@@ -7,7 +7,7 @@ import (
 	"goblog/models"
 )
 
-// Operations about Users
+// Operations about Blogs
 type BlogController struct {
 	beego.Controller
 }
@@ -26,3 +26,4 @@ func (b *BlogController) Post() {
 	b.Data["json"] = map[string]string{"blogid": blogid}
 	b.ServeJson()
 }
+

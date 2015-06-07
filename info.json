@@ -29,6 +29,33 @@ bee run -downdoc=true -gendoc=true
   "Weight": "0"
 }
 
+
+{
+  "Id": 1,
+  "BlogCategoryId": 1433682797775552825,
+  "UserId": "user_1433680325536967724",
+  "BlogTitle": "test",
+  "Content": "Content",
+  "ImageUrl": "qwere",
+  "Tags": "lxn",
+  "CreatedTime": "2015-06-01 12:02:22",
+  "Public": 0
+}
+
+
+{
+  "Id": 0,
+  "Title": "C",
+  "UserId": "user_1433672358724069383",
+  "CreatedTime": "2015-06-01 12:02:22",
+  "Descri": "test"
+}
+
+
+
+
+
+
 	Id          string    `orm:"pk"`
 	Username    string    `orm:"size(20)"`
 	Password    string    `orm:"size(100)"`
@@ -38,3 +65,8 @@ bee run -downdoc=true -gendoc=true
 	Email       string    `orm:"size(30)"`
 	CreatedTime time.Time `orm:"auto_now_add;type(datetime)"`
 	Weight      int       `orm:"int"`
+
+
+sql vs orm
+http://golanghome.com/post/240
+http://golanghome.com/post/266  
