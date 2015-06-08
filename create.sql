@@ -23,6 +23,7 @@
     CREATE TABLE IF NOT EXISTS `blogcategory` (
         `id` bigint NOT NULL PRIMARY KEY auto_increment,
         `user_id` varchar(255) NOT NULL,
+        `title` varchar(50) NOT NULL,
         `descri` varchar(255) NOT NULL,
         `created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         foreign key (user_id) references user(id) on delete cascade on update cascade

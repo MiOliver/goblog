@@ -2,7 +2,6 @@ package models
 
 import (
 	"fmt"
-	// "github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"strconv"
@@ -12,13 +11,10 @@ import (
 type BlogCategory struct {
 	Id 		int64  
     Title 	string 
-    UserId string  
+    UserId  string  
     CreatedTime time.Time 
     Descri 	string 
 }
-
-// BlogCategory *BlogCategory `orm:"rel(fk);null;on_delete(set_null)"`
-
 
 
 func init() {
@@ -27,13 +23,18 @@ func init() {
 
 func AddBlogCategory(b BlogCategory) string {
 	o := orm.NewOrm()
-	fmt.Println(time.Now().Format("2006-01-02 15:04:05"))
 	orm.DefaultTimeLoc = time.Local
-	o.Using("default")
-	b.Id=time.Now().UnixNano()
 	b.CreatedTime = time.Now();
+	o.Using("default")
 	fmt.Println(b)
-	fmt.Println(o.Insert(&b))
-	return strconv.FormatInt(int64(b.Id),10)
+	res, err := o.Raw("insert into blogcategory(user_id,title,descri,created_time) values(?,?,?,?)", 
+	b.UserId,b.Title,b.Descri,b.CreatedTime).Exec()
+	if err == nil {
+    num, _ := res.RowsAffected()
+    fmt.Println("mysql row affected nums: ", num)
+	}else{
+		fmt.Println("insert error!")
+	}
+	return strconv.FormatInt(time.Now().UnixNano(), 10)
 }
 

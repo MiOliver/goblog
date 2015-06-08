@@ -20,7 +20,6 @@ func init() {
 
 	orm.RegisterDriver("mysql", orm.DR_MySQL)
 	orm.RegisterDataBase("default", "mysql", "root:root@/go_developer?charset=utf8")
-	// orm.RegisterModel(new(BlogCategory),new(Blog),new(User))
 	UserList = make(map[string]*User)
 }
 
@@ -99,19 +98,15 @@ func UpdateUser(uu *User) (num int64, err error) {
 }
 
 func Login(username, password string) bool {
-	var users []User
-		o = orm.NewOrm()
-	rs = o.Raw("SELECT * FROM user")
-	num, err := rs.QueryRows(&users)
+	var user User
+	o = orm.NewOrm()
+	rs = o.Raw("SELECT * FROM user where username=? and password=?",username,password)
+	err := rs.QueryRow(&user)
 	if err != nil {
 	    fmt.Println(err)
-	} else {
-	    fmt.Println("Queried ", num, "users")
-	    for _, user := range users {
-			if user.Username == username && user.Password == password {
-				return true
-			}
-		}
+	}else{
+	    fmt.Println(user)
+	    return true
 	}
 	return false
 }
