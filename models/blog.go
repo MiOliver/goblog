@@ -13,7 +13,7 @@ import (
 
 type Blog struct {
 	Blogid         string
-	Blogcategoryid int64
+	BlogCategoryId int64
 	UserId         string
 	BlogTitle      string
 	Content        string
@@ -35,10 +35,10 @@ func AddBlog(b Blog) int64 {
 	b.CreatedTime = time.Now()
 	o.Using("default")
 	fmt.Println(b)
-	fmt.Println(b.Blogcategoryid)
+	fmt.Println(b.BlogCategoryId)
 	fmt.Println(b.BlogTitle)
 	res, err := o.Raw("insert into blog(blog_category_id,user_id,blog_title,content,imageurl,tags,created_time,public) values(?,?,?,?,?,?,?,?)",
-		b.Blogcategoryid, b.UserId, b.BlogTitle, b.Content, b.ImageUrl, b.Tags, b.CreatedTime, b.Public).Exec()
+		b.BlogCategoryId, b.UserId, b.BlogTitle, b.Content, b.ImageUrl, b.Tags, b.CreatedTime, b.Public).Exec()
 	if err == nil {
 		num, _ := res.RowsAffected()
 		fmt.Println("mysql row affected nums: ", num)
@@ -66,6 +66,22 @@ func GetAllBlogs(userid string) []Blog {
 	return blogs
 }
 
+
+func updateBlog(b Blog) (string, error){
+	o = orm.NewOrm()
+	fmt.Println(b.Blogid)
+	res, err := o.Raw("update blog set blog_category_id=?,user_id=?,blog_title=?,content=?,imageurl=?,tags=?,created_time=?,public=? where blogid=?",b.BlogCategoryId, b.UserId, b.BlogTitle, b.Content, b.ImageUrl, b.Tags, b.CreatedTime, b.Public, b.Blogid).Exec()
+	if err == nil {
+		num, _ := res.RowsAffected()
+		fmt.Println("mysql row affected nums: ", num)
+	} else {
+		fmt.Println("insert error!")
+	}
+
+	return b.Blogid, err
+}
+
+
 func GetBlogbyId(blogId string) (Blog, error) {
 	var blog Blog
 	o = orm.NewOrm()
@@ -79,3 +95,4 @@ func GetBlogbyId(blogId string) (Blog, error) {
 	}
 	return blog, err
 }
+

@@ -19,7 +19,7 @@ var o orm.Ormer
 func init() {
 
 	orm.RegisterDriver("mysql", orm.DR_MySQL)
-	orm.RegisterDataBase("default", "mysql", "ning:ning@/go_developer?charset=utf8")
+	orm.RegisterDataBase("default", "mysql", "root:root@/go_developer?charset=utf8")
 	UserList = make(map[string]*User)
 }
 

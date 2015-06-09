@@ -29,12 +29,12 @@ func (b *BlogController) Post() {
 
 // @Title GetAllBlogs
 // @Description get all Blogs
-// @Param userId		path 	string	true		"The key for staticblock"
+// @Param  userId	query 	string	true		"The userId for get Blogs"
 // @Success 200 {object} models.Blog
 // @Failure 403 :userId is empty
-// @router /:userId [get]
+// @router /getUserBlog [get]
 func (u *BlogController) GetAllBlogs() {
-	userId := u.GetString(":userId")
+	userId := u.GetString("userId")
 	fmt.Println(userId)
 	if userId != "" {
 		blogs := models.GetAllBlogs(userId)
@@ -46,12 +46,13 @@ func (u *BlogController) GetAllBlogs() {
 
 // @Title GetBlog
 // @Description get blog by blogId
-// @Param	blogId		path 	string	true		"The key for staticblock"
+// @Param	blogId	 query 	string	true		"The blogId for get Blogs"
 // @Success 200 {object} models.Blog
 // @Failure 403 :blogId is empty
-// @router /:blogId [get]
+// @router /getOneBlog [get]
 func (u *BlogController) GetBlog() {
-	blogId := u.GetString(":blogId")
+	// blogId := u.GetString(":blogId")  //param type difference path
+	blogId := u.GetString("blogId")      //param type difference query
 	fmt.Println(blogId)
 	if blogId != "" {
 		blog, err := models.GetBlogbyId(blogId)
@@ -62,4 +63,26 @@ func (u *BlogController) GetBlog() {
 		}
 	}
 	u.ServeJson()
+}
+
+// @Title setBlog
+// @Description update blog 
+ //@Param	body		body 	models.Blog	true		"body for blog update"
+// @Success 200 {int} models.Blog.Id
+// @Failure 403 :blogId is empty
+// @router /resetBlog [get]
+func (b *BlogController) setBlog() {
+	var blog models.Blog
+	fmt.Println(string(b.Ctx.Input.RequestBody))
+	json.Unmarshal(b.Ctx.Input.RequestBody, &blog)
+	fmt.Println(blog.Blogid)
+	if blog.Blogid != "" {
+		blogId, err := models.updateBlog(blog)
+		if err != nil {
+			b.Data["json"] = err
+		} else {
+			b.Data["json"] = blogId
+		}
+	}
+	b.ServeJson()
 }
