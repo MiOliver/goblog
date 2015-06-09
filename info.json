@@ -32,8 +32,8 @@ bee run -downdoc=true -gendoc=true
 
 {
   "Id": 1,
-  "BlogCategoryId": 1433682797775552825,
-  "UserId": "user_1433680325536967724",
+  "BlogCategoryId": 2,
+  "UserId": "user_1433852026322401409",
   "BlogTitle": "test",
   "Content": "Content",
   "ImageUrl": "qwere",
@@ -42,14 +42,34 @@ bee run -downdoc=true -gendoc=true
   "Public": 0
 }
 
+{
+  "Id": 1,
+  "BlogCategoryId": 2,
+  "UserId": "user_1433852026322401409",
+  "BlogTitle": "马德里竞技",
+  "Content": "绿茵集结号",
+  "ImageUrl": "qwere",
+  "Tags": "lxn",
+  "CreatedTime": "2015-06-01 12:02:22",
+  "Public": 0
+}
 
 {
   "Id":0,
   "Title":"golang",
-  "UserId":"user_1433689062285430207",
+  "UserId":"user_1433852026322401409",
   "CreatedTime":"2015-06-01 12:02:22",
   "Descri":"good test"
 }
+
+{
+  "Id":0,
+  "Title":"java",
+  "Descri":"good test",
+  "UserId":"user_1433852026322401409",
+  "CreatedTime":"2015-06-01 12:02:22"
+}
+
 
 
 

@@ -19,22 +19,21 @@ var o orm.Ormer
 func init() {
 
 	orm.RegisterDriver("mysql", orm.DR_MySQL)
-	orm.RegisterDataBase("default", "mysql", "root:root@/go_developer?charset=utf8")
+	orm.RegisterDataBase("default", "mysql", "ning:ning@/go_developer?charset=utf8")
 	UserList = make(map[string]*User)
 }
 
 type User struct {
-	Id          string    
-	Username    string    
-	Password    string   
-	Gender      string    
-	Age         int       
-	Address     string    
-	Email       string   
-	CreatedTime time.Time 
-	Weight      int      
+	Id          string
+	Username    string
+	Password    string
+	Gender      string
+	Age         int
+	Address     string
+	Email       string
+	CreatedTime time.Time
+	Weight      int
 }
-
 
 func AddUser(u User) string {
 	o := orm.NewOrm()
@@ -44,12 +43,12 @@ func AddUser(u User) string {
 	u.Id = "user_" + strconv.FormatInt(time.Now().UnixNano(), 10)
 	u.CreatedTime = time.Now()
 	fmt.Println(u)
-	res, err := o.Raw("insert into user(id,username,password,gender,age,address,email,created_time,weight) values(?,?,?,?,?,?,?,?,?)", 
-		u.Id,u.Username,u.Password,u.Gender,u.Age,u.Address,u.Email,u.CreatedTime,u.Weight).Exec()
+	res, err := o.Raw("insert into user(id,username,password,gender,age,address,email,created_time,weight) values(?,?,?,?,?,?,?,?,?)",
+		u.Id, u.Username, u.Password, u.Gender, u.Age, u.Address, u.Email, u.CreatedTime, u.Weight).Exec()
 	if err == nil {
-    num, _ := res.RowsAffected()
-    fmt.Println("mysql row affected nums: ", num)
-	}else{
+		num, _ := res.RowsAffected()
+		fmt.Println("mysql row affected nums: ", num)
+	} else {
 		fmt.Println("insert error!")
 	}
 	return u.Id
@@ -73,12 +72,12 @@ func GetAllUsers() []User {
 
 	num, err := rs.QueryRows(&users)
 	if err != nil {
-	    fmt.Println(err)
+		fmt.Println(err)
 	} else {
-	    fmt.Println("Queried ", num, "users")
-	    for _, user := range users {
-	        fmt.Println(user)
-	    }
+		fmt.Println("Queried ", num, "users")
+		for _, user := range users {
+			fmt.Println(user)
+		}
 	}
 
 	return users
@@ -100,13 +99,13 @@ func UpdateUser(uu *User) (num int64, err error) {
 func Login(username, password string) bool {
 	var user User
 	o = orm.NewOrm()
-	rs = o.Raw("SELECT * FROM user where username=? and password=?",username,password)
+	rs = o.Raw("SELECT * FROM user where username=? and password=?", username, password)
 	err := rs.QueryRow(&user)
 	if err != nil {
-	    fmt.Println(err)
-	}else{
-	    fmt.Println(user)
-	    return true
+		fmt.Println(err)
+	} else {
+		fmt.Println(user)
+		return true
 	}
 	return false
 }
