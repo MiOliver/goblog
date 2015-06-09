@@ -50,7 +50,6 @@ func AddBlog(b Blog) int64 {
 }
 
 func GetAllBlogs(userid string) []Blog {
-
 	var blogs []Blog
 	o = orm.NewOrm()
 	fmt.Println(userid)
@@ -64,22 +63,19 @@ func GetAllBlogs(userid string) []Blog {
 			fmt.Println(blog)
 		}
 	}
-
 	return blogs
 }
 
 func GetBlogbyId(blogId string) (Blog, error) {
-
 	var blog Blog
 	o = orm.NewOrm()
-	rs = o.Raw("SELECT * FROM blog where blogid=?", blogId)
-
+	fmt.Println(blogId)
+	rs = o.Raw("select * from blog where blogid=?", blogId)
 	err := rs.QueryRow(&blog)
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(blog)
 	}
-
 	return blog, err
 }
