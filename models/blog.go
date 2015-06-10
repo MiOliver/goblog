@@ -66,22 +66,6 @@ func GetAllBlogs(userid string) []Blog {
 	return blogs
 }
 
-
-func updateBlog(b Blog) (string, error){
-	o = orm.NewOrm()
-	fmt.Println(b.Blogid)
-	res, err := o.Raw("update blog set blog_category_id=?,user_id=?,blog_title=?,content=?,imageurl=?,tags=?,created_time=?,public=? where blogid=?",b.BlogCategoryId, b.UserId, b.BlogTitle, b.Content, b.ImageUrl, b.Tags, b.CreatedTime, b.Public, b.Blogid).Exec()
-	if err == nil {
-		num, _ := res.RowsAffected()
-		fmt.Println("mysql row affected nums: ", num)
-	} else {
-		fmt.Println("insert error!")
-	}
-
-	return b.Blogid, err
-}
-
-
 func GetBlogbyId(blogId string) (Blog, error) {
 	var blog Blog
 	o = orm.NewOrm()
@@ -96,3 +80,18 @@ func GetBlogbyId(blogId string) (Blog, error) {
 	return blog, err
 }
 
+func ChangeBlog(b Blog) (string, error) {
+	o = orm.NewOrm()
+	o.Using("default")
+	fmt.Println(b.Blogid)
+	res, err := o.Raw("update blog set blog_category_id=?,blog_title=?,content=?,imageurl=?,tags=?,created_time=?,public=? where blogid=?",
+		b.BlogCategoryId, b.BlogTitle, b.Content, b.ImageUrl, b.Tags, b.CreatedTime, b.Public, b.Blogid).Exec()
+	if err == nil {
+		num, _ := res.RowsAffected()
+		fmt.Println("mysql row affected nums: ", num)
+	} else {
+		fmt.Println("update error!")
+	}
+
+	return b.Blogid, err
+}
