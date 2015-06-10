@@ -42,8 +42,34 @@ bee run -downdoc=true -gendoc=true
   "Public": 0
 }
 
+  Blogid         string
+  BlogCategoryId int64
+  UserId         string
+  BlogTitle      string
+  Content        string
+  ImageUrl       string
+  Tags           string
+  CreatedTime    time.Time
+  Public         int
+
+
+//reset blog
 {
-  "Id": 1,
+  "Blogid": "7",
+  "BlogCategoryId": 2,
+  "UserId": "user_1433852026322401409",
+  "BlogTitle": "madeli",
+  "Content": "follow your heart!",
+  "ImageUrl": "bw/kdfad/adsf.png",
+  "Tags": "lxn",
+  "CreatedTime": "",
+  "Public": 0
+}
+
+
+//insert blog
+{
+  "Blogid": "",
   "BlogCategoryId": 2,
   "UserId": "user_1433852026322401409",
   "BlogTitle": "马德里竞技",
@@ -53,6 +79,10 @@ bee run -downdoc=true -gendoc=true
   "CreatedTime": "2015-06-01 12:02:22",
   "Public": 0
 }
+
+
+
+insert into blog(blog_category_id,user_id,blog_title,content,imageurl,tags,created_time,public) values(2,'user_1433852026322401409','马德里竞技','绿茵集结号','qwere','lxn','2015-06-01 12:02:22',0);
 
 {
   "Id":0,

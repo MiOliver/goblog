@@ -87,3 +87,23 @@ func (b *BlogController) SetBlog() {
 	}
 	b.ServeJson()
 }
+
+// @Title DeleteBlog
+// @Description delete blog by blogId
+// @Param	blogId	 query 	string	true		"The blogId for delete Blogs"
+// @Success 200 {string} delete success!
+// @Failure 403 :blogId is empty
+// @router /deleteBlog [get]
+func (u *BlogController) DeleteBlog() {
+	blogId := u.GetString("blogId") //param type difference query
+	fmt.Println(blogId)
+	if blogId != "" {
+		num := models.DeleteBlogbyId(blogId)
+		if num > 0 {
+			u.Data["json"] = "delete success!"
+		} else {
+			u.Data["json"] = "delete failure!"
+		}
+	}
+	u.ServeJson()
+}

@@ -95,3 +95,17 @@ func ChangeBlog(b Blog) (string, error) {
 
 	return b.Blogid, err
 }
+
+func DeleteBlogbyId(blogId string) int64 {
+	var affectNum int64
+	affectNum = 0
+	o = orm.NewOrm()
+	fmt.Println(blogId)
+	res, err := o.Raw("delete from blog where blogid=?", blogId).Exec()
+	if err == nil {
+		num, _ := res.RowsAffected()
+		affectNum = num
+		fmt.Println("mysql row affected nums: ", num)
+	}
+	return affectNum
+}

@@ -6,41 +6,6 @@ import (
 
 func init() {
 	
-	beego.GlobalControllerRouter["goblog/controllers:ObjectController"] = append(beego.GlobalControllerRouter["goblog/controllers:ObjectController"],
-		beego.ControllerComments{
-			"Post",
-			`/`,
-			[]string{"post"},
-			nil})
-
-	beego.GlobalControllerRouter["goblog/controllers:ObjectController"] = append(beego.GlobalControllerRouter["goblog/controllers:ObjectController"],
-		beego.ControllerComments{
-			"Get",
-			`/:objectId`,
-			[]string{"get"},
-			nil})
-
-	beego.GlobalControllerRouter["goblog/controllers:ObjectController"] = append(beego.GlobalControllerRouter["goblog/controllers:ObjectController"],
-		beego.ControllerComments{
-			"GetAll",
-			`/`,
-			[]string{"get"},
-			nil})
-
-	beego.GlobalControllerRouter["goblog/controllers:ObjectController"] = append(beego.GlobalControllerRouter["goblog/controllers:ObjectController"],
-		beego.ControllerComments{
-			"Put",
-			`/:objectId`,
-			[]string{"put"},
-			nil})
-
-	beego.GlobalControllerRouter["goblog/controllers:ObjectController"] = append(beego.GlobalControllerRouter["goblog/controllers:ObjectController"],
-		beego.ControllerComments{
-			"Delete",
-			`/:objectId`,
-			[]string{"delete"},
-			nil})
-
 	beego.GlobalControllerRouter["goblog/controllers:BlogCategoryController"] = append(beego.GlobalControllerRouter["goblog/controllers:BlogCategoryController"],
 		beego.ControllerComments{
 			"Post",
@@ -123,6 +88,48 @@ func init() {
 			"SetBlog",
 			`/resetBlog`,
 			[]string{"post"},
+			nil})
+
+	beego.GlobalControllerRouter["goblog/controllers:BlogController"] = append(beego.GlobalControllerRouter["goblog/controllers:BlogController"],
+		beego.ControllerComments{
+			"DeleteBlog",
+			`/deleteBlog`,
+			[]string{"get"},
+			nil})
+
+	beego.GlobalControllerRouter["goblog/controllers:ObjectController"] = append(beego.GlobalControllerRouter["goblog/controllers:ObjectController"],
+		beego.ControllerComments{
+			"Post",
+			`/`,
+			[]string{"post"},
+			nil})
+
+	beego.GlobalControllerRouter["goblog/controllers:ObjectController"] = append(beego.GlobalControllerRouter["goblog/controllers:ObjectController"],
+		beego.ControllerComments{
+			"Get",
+			`/:objectId`,
+			[]string{"get"},
+			nil})
+
+	beego.GlobalControllerRouter["goblog/controllers:ObjectController"] = append(beego.GlobalControllerRouter["goblog/controllers:ObjectController"],
+		beego.ControllerComments{
+			"GetAll",
+			`/`,
+			[]string{"get"},
+			nil})
+
+	beego.GlobalControllerRouter["goblog/controllers:ObjectController"] = append(beego.GlobalControllerRouter["goblog/controllers:ObjectController"],
+		beego.ControllerComments{
+			"Put",
+			`/:objectId`,
+			[]string{"put"},
+			nil})
+
+	beego.GlobalControllerRouter["goblog/controllers:ObjectController"] = append(beego.GlobalControllerRouter["goblog/controllers:ObjectController"],
+		beego.ControllerComments{
+			"Delete",
+			`/:objectId`,
+			[]string{"delete"},
 			nil})
 
 }
