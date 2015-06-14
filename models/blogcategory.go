@@ -37,3 +37,20 @@ func AddBlogCategory(b BlogCategory) string {
 	}
 	return strconv.FormatInt(time.Now().UnixNano(), 10)
 }
+
+func GetAllBlogCategory(userid string) []BlogCategory {
+	var blogcategorys []BlogCategory
+	o = orm.NewOrm()
+	fmt.Println(userid)
+	rs = o.Raw("select * from blogcategory where user_id=?", userid)
+	num, err := rs.QueryRows(&blogcategorys)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("Queried ", num, "blogs")
+		for _, blogcategory := range blogcategorys {
+			fmt.Println(blogcategory)
+		}
+	}
+	return blogcategorys
+}

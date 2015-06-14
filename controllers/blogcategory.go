@@ -27,3 +27,20 @@ func (b *BlogCategoryController) Post() {
 	b.Data["json"] = map[string]string{"blogid": blogid}
 	b.ServeJson()
 }
+
+// @Title GetAllBlogCategory
+// @Description get all BlogCategory
+// @Param  userId	query 	string	true		"The userId for get BlogCategory"
+// @Success 200 {object} models.BlogCategory
+// @Failure 403 :userId is empty
+// @router /getUserBlogCategory [get]
+func (u *BlogCategoryController) GetBlogCategory() {
+	userId := u.GetString("userId")
+	fmt.Println(userId)
+	if userId != "" {
+		blogCategorys := models.GetAllBlogCategory(userId)
+		u.Data["json"] = blogCategorys
+	}
+
+	u.ServeJson()
+}

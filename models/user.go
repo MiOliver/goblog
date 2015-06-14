@@ -19,7 +19,7 @@ var o orm.Ormer
 func init() {
 
 	orm.RegisterDriver("mysql", orm.DR_MySQL)
-	orm.RegisterDataBase("default", "mysql", "ning:ning@/go_developer?charset=utf8")
+	orm.RegisterDataBase("default", "mysql", "root:root@/go_developer?charset=utf8")
 	UserList = make(map[string]*User)
 }
 
@@ -96,7 +96,7 @@ func UpdateUser(uu *User) (num int64, err error) {
 	return num, err
 }
 
-func Login(username, password string) bool {
+func Login(username, password string) (bool,User) {
 	var user User
 	o = orm.NewOrm()
 	rs = o.Raw("SELECT * FROM user where username=? and password=?", username, password)
@@ -105,9 +105,9 @@ func Login(username, password string) bool {
 		fmt.Println(err)
 	} else {
 		fmt.Println(user)
-		return true
+		return true,user
 	}
-	return false
+	return false,user
 }
 
 func DeleteUser(uid string) {

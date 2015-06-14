@@ -77,7 +77,7 @@ func (b *BlogController) SetBlog() {
 	json.Unmarshal(b.Ctx.Input.RequestBody, &blog)
 	fmt.Println(blog)
 	fmt.Println(blog.Blogid)
-	if blog.Blogid != "" {
+	if blog.Blogid >0 {
 		blogId, err := models.ChangeBlog(blog)
 		if err != nil {
 			b.Data["json"] = err

@@ -34,8 +34,8 @@ bee run -downdoc=true -gendoc=true
   "Id": 1,
   "BlogCategoryId": 2,
   "UserId": "user_1433852026322401409",
-  "BlogTitle": "test",
-  "Content": "Content",
+  "BlogTitle": "WERWE",
+  "Content": "XDFSAEDF",
   "ImageUrl": "qwere",
   "Tags": "lxn",
   "CreatedTime": "2015-06-01 12:02:22",
@@ -51,6 +51,34 @@ bee run -downdoc=true -gendoc=true
   Tags           string
   CreatedTime    time.Time
   Public         int
+
+
+{
+"Blogid":"",
+"BlogCategoryId":2,
+"UserId":"user_1433689062285430207",
+"BlogTitle":"orz是也破我",
+"Content":"sponsor",
+"ImageUrl":"image",
+"Tags":"tags",
+"CreatedTime":"",
+"Public":0
+}
+
+{
+  "Blogid":0,
+"BlogCategoryId":2,
+"UserId":"user_1433689062285430207",
+"BlogTitle":"哈agar",
+
+"Content":"破婆婆",
+
+"ImageUrl":"image",
+
+"Tags":"tags",
+"CreatedTime":"",
+"Public":0
+}
 
 
 //reset blog
@@ -71,7 +99,7 @@ bee run -downdoc=true -gendoc=true
 {
   "Blogid": "",
   "BlogCategoryId": 2,
-  "UserId": "user_1433852026322401409",
+  "UserId": "user_1433689062285430207",
   "BlogTitle": "马德里竞技",
   "Content": "绿茵集结号",
   "ImageUrl": "qwere",
@@ -79,6 +107,64 @@ bee run -downdoc=true -gendoc=true
   "CreatedTime": "2015-06-01 12:02:22",
   "Public": 0
 }
+
+
+
+{
+  "Blogid":0,
+"BlogCategoryId":2,
+"UserId":"user_1433689062285430207",
+
+"BlogTitle":"orz是也破我",
+
+"Content":"sponsor",
+
+"ImageUrl":"image",
+"Tags":"tags",
+"CreatedTime":"",
+"Public":0
+}
+
+
+{
+"BlogCategoryId":2,
+"BlogTitle":"orz是也破我",
+"Blogid":0,
+"Content":"sponsor",
+"ImageUrl":"image",
+"UserId":"user_1433689062285430207",
+"Tags":"tags",
+"CreatedTime":"qwerwer",
+"Public":0
+}
+
+{
+"BlogCategoryId":2,
+"BlogTitle":"orz是也破我",
+"Blogid":0,
+"Content":"sponsor",
+"CreatedTime":"",
+"ImageUrl":"image",
+"UserId":"user_1433689062285430207",
+"Tags":"tags",
+"Public":0
+}
+
+{
+"BlogCategoryId":2,
+"BlogTitle":"jxkxjjxjx",
+"Blogid":0,
+"Content":"xuhxhcjcjv",
+
+"ImageUrl":"image",
+"UserId":"user_1433689062285430207",
+"CreatedTime":"2015-05-05 12:00:00",
+"Tags":"tags",
+"Public":0
+}
+
+
+
 
 
 

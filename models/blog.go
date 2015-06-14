@@ -12,7 +12,7 @@ import (
 // BlogCategory *BlogCategory `orm:"rel(fk);null;on_delete(set_null)"`
 
 type Blog struct {
-	Blogid         string
+	Blogid         int64
 	BlogCategoryId int64
 	UserId         string
 	BlogTitle      string
@@ -32,9 +32,9 @@ func AddBlog(b Blog) int64 {
 	affectedNum = 0
 	o := orm.NewOrm()
 	orm.DefaultTimeLoc = time.Local
+	fmt.Println(b)
 	b.CreatedTime = time.Now()
 	o.Using("default")
-	fmt.Println(b)
 	fmt.Println(b.BlogCategoryId)
 	fmt.Println(b.BlogTitle)
 	res, err := o.Raw("insert into blog(blog_category_id,user_id,blog_title,content,imageurl,tags,created_time,public) values(?,?,?,?,?,?,?,?)",
@@ -80,7 +80,7 @@ func GetBlogbyId(blogId string) (Blog, error) {
 	return blog, err
 }
 
-func ChangeBlog(b Blog) (string, error) {
+func ChangeBlog(b Blog) (int64, error) {
 	o = orm.NewOrm()
 	o.Using("default")
 	fmt.Println(b.Blogid)
