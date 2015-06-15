@@ -14,7 +14,7 @@ type BlogCategory struct {
 	Title       string
 	UserId      string
 	Descri      string
-	CreatedTime time.Time
+	CreatedTime string
 }
 
 func init() {
@@ -24,7 +24,7 @@ func init() {
 func AddBlogCategory(b BlogCategory) string {
 	o := orm.NewOrm()
 	orm.DefaultTimeLoc = time.Local
-	b.CreatedTime = time.Now()
+	b.CreatedTime = time.Now().Format("2006-01-02 15:04:05")
 	o.Using("default")
 	fmt.Println(b)
 	res, err := o.Raw("insert into blogcategory(user_id,title,descri,created_time) values(?,?,?,?)",

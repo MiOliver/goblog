@@ -96,16 +96,17 @@ func (u *UserController) Delete() {
 // @Description Logs user into the system
 // @Param	username		query 	string	true		"The username for login"
 // @Param	password		query 	string	true		"The password for login"
-// @Success 200 {string} login success
+// @Success 200 {object} models.User
 // @Failure 403 user not exist
 // @router /login [get]
 func (u *UserController) Login() {
 	username := u.GetString("username")
 	password := u.GetString("password")
-	if models.Login(username, password) {
-		u.Data["json"] = "login success"
+	flag,user := models.Login(username, password) 
+	if(flag){
+		u.Data["json"] = user
 	} else {
-		u.Data["json"] = "user not exist"
+		u.Data["json"] = "login failure"
 	}
 	u.ServeJson()
 }
