@@ -7,11 +7,10 @@ import (
 	"goblog/models"
 )
 
-// Operations about Blogs
+// Operations about BlogCategory
 type BlogCategoryController struct {
 	beego.Controller
 }
-
 
 // @Title createBlogCategory
 // @Description create BlogCategory
@@ -26,4 +25,21 @@ func (b *BlogCategoryController) Post() {
 	blogid := models.AddBlogCategory(bc)
 	b.Data["json"] = map[string]string{"blogid": blogid}
 	b.ServeJson()
+}
+
+// @Title GetAllBlogCategory
+// @Description get all BlogCategory
+// @Param  userId	query 	string	true		"The userId for get BlogCategory"
+// @Success 200 {int} models.BlogCategory.Id
+// @Failure 403 :userId is empty
+// @router /getUserBlogCategory [get]
+func (u *BlogCategoryController) GetAllBlogCategory() {
+	userId := u.GetString("userId")
+	fmt.Println(userId)
+	if userId != "" {
+		blogcategorys := models.GetAllBlogCategory(userId)
+		u.Data["json"] = blogcategorys
+	}
+
+	u.ServeJson()
 }

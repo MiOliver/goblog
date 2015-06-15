@@ -66,6 +66,23 @@ func GetAllBlogs(userid string) []Blog {
 	return blogs
 }
 
+func GetRecentBlogs(userid string) []Blog {
+	var blogs []Blog
+	o = orm.NewOrm()
+	fmt.Println(userid)
+	rs = o.Raw("select * from blog where user_id=? order by blogid desc limit 2", userid)
+	num, err := rs.QueryRows(&blogs)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("Queried ", num, "blogs")
+		for _, blog := range blogs {
+			fmt.Println(blog)
+		}
+	}
+	return blogs
+}
+
 func GetBlogbyId(blogId string) (Blog, error) {
 	var blog Blog
 	o = orm.NewOrm()

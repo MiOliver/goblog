@@ -44,6 +44,23 @@ func (u *BlogController) GetAllBlogs() {
 	u.ServeJson()
 }
 
+// @Title GetRecentBlogs
+// @Description get recent Blogs
+// @Param  userId	query 	string	true		"The userId for get Blogs"
+// @Success 200 {object} models.Blog
+// @Failure 403 :userId is empty
+// @router /getrecentBlogs [get]
+func (u *BlogController) GetRecentBlogs() {
+	userId := u.GetString("userId")
+	fmt.Println(userId)
+	if userId != "" {
+		blogs := models.GetRecentBlogs(userId)
+		u.Data["json"] = blogs
+	}
+
+	u.ServeJson()
+}
+
 // @Title GetBlog
 // @Description get blog by blogId
 // @Param	blogId	 query 	string	true		"The blogId for get Blogs"
