@@ -31,7 +31,7 @@ type User struct {
 	Age         int
 	Address     string
 	Email       string
-	CreatedTime time.Time
+	CreatedTime string
 	Weight      int
 }
 
@@ -41,7 +41,7 @@ func AddUser(u User) string {
 	orm.DefaultTimeLoc = time.Local
 	o.Using("default")
 	u.Id = "user_" + strconv.FormatInt(time.Now().UnixNano(), 10)
-	u.CreatedTime = time.Now()
+	u.CreatedTime = time.Now().Format("2006-01-02 15:04:05")
 	fmt.Println(u)
 	res, err := o.Raw("insert into user(id,username,password,gender,age,address,email,created_time,weight) values(?,?,?,?,?,?,?,?,?)",
 		u.Id, u.Username, u.Password, u.Gender, u.Age, u.Address, u.Email, u.CreatedTime, u.Weight).Exec()
@@ -96,18 +96,24 @@ func UpdateUser(uu *User) (num int64, err error) {
 	return num, err
 }
 
-func Login(username, password string) (bool,User) {
+func Login(username, password string) (bool, User) {
 	var user User
 	o = orm.NewOrm()
 	rs = o.Raw("SELECT * FROM user where username=? and password=?", username, password)
 	err := rs.QueryRow(&user)
+
 	if err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(user)
-		return true,user
+		// DefaultTimeLoc := time.Local
+		// var createTime string
+		// createTime = user.CreatedTime
+		// user.CreatedTime, err := time.ParseInLocation("2006-01-02 15:04:05",user.CreatedTime, DefaultTimeLoc)
+		// fmt.Println(user)
+		return true, user
 	}
-	return false,user
+	return false, user
 }
 
 func DeleteUser(uid string) {

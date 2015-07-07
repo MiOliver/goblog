@@ -102,11 +102,14 @@ func (u *UserController) Delete() {
 func (u *UserController) Login() {
 	username := u.GetString("username")
 	password := u.GetString("password")
-	flag,user := models.Login(username, password) 
-	if(flag){
-		u.Data["json"] = user
+	flag, user := models.Login(username, password)
+	if flag {
+		res := models.CreateResponse(models.SuccessCode, "login success", user)
+		u.Data["json"] = res
 	} else {
-		u.Data["json"] = "login failure"
+		res := models.CreateResponse(models.FailCode, "login failure", "")
+		u.Data["json"] = res
+
 	}
 	u.ServeJson()
 }
